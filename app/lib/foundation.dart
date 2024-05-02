@@ -1,52 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:go_router/go_router.dart';
-import 'package:transparent_pointer/transparent_pointer.dart';
 
-import 'shadow_box.dart';
+import 'components/shadow_box.dart';
+import 'icon_gallery.dart';
 
 /// The application skeleton.
 class Skeleton extends StatelessWidget {
   final Widget _background;
-  final Widget? _panel;
+  final List<Widget> children;
 
-  const Skeleton({super.key, required Widget background, Widget? panel})
+  Skeleton.withTopPanel(
+      {super.key,
+      required Widget background,
+      required Widget topPanel,
+      required Widget mainPanel})
       : _background = background,
-        _panel = panel;
+        children = [
+          topPanel,
+          _skeletonTransparentFiller(),
+          mainPanel,
+          _skeletonDivisor(),
+          _createNavBar()
+        ];
+
+  Skeleton.onlyTopPanel(
+      {super.key, required Widget background, required Widget topPanel})
+      : _background = background,
+        children = [topPanel, _skeletonTransparentFiller(), _createNavBar()];
 
   @override
   Widget build(BuildContext context) {
-    const navBar = NavBar();
-
-    final List<Widget> children;
-    if (_panel != null) {
-      children = [
-        _divisor(),
-        TransparentPointer(child: _panel),
-        _divisor(),
-        navBar
-      ];
-    } else {
-      children = [navBar];
-    }
-
-    return Stack(
-      children: [
-        _background,
-        Padding(
+    return Stack(children: [
+      _background,
+      SafeArea(
+        child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
             children: children,
           ),
-        )
-      ],
-    );
-  }
-
-  Widget _divisor() {
-    return const SizedBox(
-      height: 10,
-    );
+        ),
+      )
+    ]);
   }
 }
 
@@ -61,9 +56,10 @@ class NavBar extends StatelessWidget {
     return ShadowBox(
       child: Row(
         children: [
-          _button(0x61, '/main/layers', context, state, theme),
-          _button(0x62, '/main/search', context, state, theme),
-          _button(0x63, '/main/settings', context, state, theme),
+          _button(IconGallery.layers, '/main/layers', context, state, theme),
+          _button(IconGallery.search, '/main/search', context, state, theme),
+          _button(
+              IconGallery.settings, '/main/settings', context, state, theme),
           _divisor(context),
           _logo()
         ],
@@ -71,44 +67,71 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  Widget _button(int codePoint, String path, BuildContext context,
+  Widget _button(IconData iconData, String path, BuildContext context,
       GoRouterState state, ThemeData theme) {
     return Expanded(
       child: GestureDetector(
         onTap: () => context.go(path),
         child: Icon(
-          IconData(codePoint, fontFamily: 'icon-gallery'),
+          iconData,
           size: 30,
-          color:
-              state.fullPath == path ? theme.colorScheme.inversePrimary : theme.colorScheme.primary,
+          color: state.fullPath == path
+              ? theme.colorScheme.inversePrimary
+              : theme.colorScheme.primary,
         ),
       ),
     );
   }
 
   Widget _divisor(BuildContext context) {
-    return Expanded(
-      child: Center(
-        child: Container(
-          width: 3,
-          height: 40,
-          color: Theme.of(context).colorScheme.secondaryContainer,
-        ),
+    return SizedBox(
+      width: 3,
+      height: 40,
+      child: Container(
+        color: Theme.of(context).colorScheme.secondaryContainer,
       ),
     );
   }
 
   Widget _logo() {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(4),
-        child: Image.asset(
-          'images/logo-256x256.png',
-          height: 60,
-          cacheHeight: 60,
-          filterQuality: FilterQuality.high,
-        ),
+    return const Expanded(
+      child: Image(
+        width: 40,
+          height: 40,
+          image: Svg('images/logo.svg'),
       ),
     );
   }
+}
+
+class RealtimePanel extends StatelessWidget {
+  const RealtimePanel({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ShadowBox(
+      child: Row(
+        children: [
+          Text(
+            'Realtime',
+            style: Theme.of(context).textTheme.titleSmall,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+Widget _createNavBar() {
+  return const NavBar();
+}
+
+Widget _skeletonTransparentFiller() {
+  return const Expanded(child: Placeholder());
+}
+
+Widget _skeletonDivisor() {
+  return const SizedBox(
+    height: 5,
+  );
 }

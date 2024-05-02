@@ -1,5 +1,6 @@
-import 'package:app/theme/default_theme.dart';
 import 'package:flutter/material.dart';
+
+import '../theme.dart';
 
 class ShadowBox extends StatelessWidget {
   final Widget child;
@@ -8,7 +9,7 @@ class ShadowBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultTheme = DefaultTheme.of(context);
+    final appTheme = AppTheme.of(context);
     final theme = Theme.of(context);
 
     return Container(
@@ -18,8 +19,8 @@ class ShadowBox extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           boxShadow: [
             BoxShadow(
-                offset: defaultTheme.shadowTheme.offset,
-                blurRadius: defaultTheme.shadowTheme.blurRadius,
+                offset: appTheme.shadowTheme.offset,
+                blurRadius: appTheme.shadowTheme.blurRadius,
                 color: theme.colorScheme.shadow)
           ]),
       child: child,
