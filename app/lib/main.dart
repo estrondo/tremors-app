@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'components/background_map.dart';
 import 'foundation.dart';
@@ -9,9 +11,14 @@ void main() {
   final app = MaterialApp.router(
     color: Colors.redAccent,
     routerConfig: router(
-        backgroundMap: const BackgroundMap(),
-        topPanel: const RealtimePanel()),
+        backgroundMap: const BackgroundMap(), topPanel: const RealtimePanel()),
     theme: theme(),
+    localizationsDelegates: const [
+      AppLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate
+    ],
+    supportedLocales: const [Locale("en"), Locale("pt")],
   );
 
   runApp(AppTheme(

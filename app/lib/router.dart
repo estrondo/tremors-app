@@ -1,8 +1,9 @@
 import 'dart:math';
 
-import 'package:app/panel.dart';
 import 'package:app/components/shadow_box.dart';
+import 'package:app/panel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import 'foundation.dart';
@@ -49,12 +50,12 @@ GoRouter router({required Widget backgroundMap, required Widget topPanel}) {
   final c2 = nextColor();
   final c3 = nextColor();
 
-  final Widget layerPanel = Panel(
-    iconCode: 0x61,
-    title: 'layers',
-    footer: placeHolder(c2),
-    content: placeHolder(c1)
-  );
+  final Widget layerPanel = Builder(
+      builder: (context) => Panel(
+          iconCode: 0x61,
+          title: AppLocalizations.of(context)!.layers_title,
+          footer: placeHolder(c2),
+          content: placeHolder(c1)));
 
   return GoRouter(initialLocation: '/main', debugLogDiagnostics: true, routes: [
     routePage('/main', () => onlyTopPanel()),
