@@ -32,9 +32,12 @@ class Panel extends StatelessWidget {
 
     return ShadowBox(
         child: Column(children: [
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [..._titleWidget(context), ..._closeWidget(context)],
+      SizedBox(
+        height: headerHeight,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [..._titleWidget(context), ..._closeWidget(context)],
+        ),
       ),
       _divisor(context),
       _content,

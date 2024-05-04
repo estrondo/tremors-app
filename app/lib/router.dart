@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import 'foundation.dart';
 import 'main_panel/layer_panel.dart';
+import 'main_panel/search_panel.dart';
 
 typedef _WidgetBuilder = Widget Function();
 
@@ -50,8 +51,8 @@ GoRouter router({required Widget backgroundMap, required Widget topPanel}) {
 
   return GoRouter(initialLocation: '/main', debugLogDiagnostics: true, routes: [
     routePage('/main', () => onlyTopPanel()),
-    routePage('/main/layers', () => withTopPanel(() => LayerPanel())),
-    routePage('/main/search', () => withTopPanel(() => placeHolder(c2))),
+    routePage('/main/layers', () => withTopPanel(() => const LayerPanel())),
+    routePage('/main/search', () => withTopPanel(() => const SearchPanel())),
     routePage('/main/settings', () => withTopPanel(() => placeHolder(c3))),
   ]);
 }

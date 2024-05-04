@@ -1,5 +1,15 @@
 {
   "layers_title": "Layers",
   "layers_background_maps_title": "Background Maps",
-  "layers_additional_maps_title": "Additional Maps Information"
+  "layers_additional_maps_title": "Additional Maps Information",
+  "search_title": "Search",
+  "search_apply": "Apply",
+  "search_cancel": "Cancel",
+  "search_magnitude_range": "Magnitude Range",
+  "search_magnitude_type": "Magnitude type",
+  "search_station_count": "Station count",
+  "search_evaluation_mode": "Evaluation mode",
+  "search_evaluation_status": "Evaluation status",
+  "search_regions": "Regions",
+  "search_saved_searches": "Saved searches"
 }

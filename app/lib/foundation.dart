@@ -127,7 +127,7 @@ Widget _createNavBar() {
 }
 
 Widget _skeletonTransparentFiller() {
-  return const Expanded(child: Placeholder());
+  return Expanded(child: Container());
 }
 
 Widget _skeletonDivisor() {

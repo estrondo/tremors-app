@@ -1,5 +1,15 @@
 {
   "layers_title": "Camadas",
   "layers_background_maps_title": "Mapas de fundo",
-  "layers_additional_maps_title": "Camadas adicionais"
+  "layers_additional_maps_title": "Camadas adicionais",
+  "search_title": "Procurar",
+  "search_apply": "Aplicar",
+  "search_cancel": "Cancelar",
+  "search_magnitude_range": "Intervalo de magnitudes",
+  "search_magnitude_type": "Tipo de magnitude",
+  "search_station_count": "Quantidades de estações",
+  "search_evaluation_mode": "Tipo de avaliação",
+  "search_evaluation_status": "Status da avaliação",
+  "search_regions": "Regiões",
+  "search_saved_searches": "Buscas regitradas"
 }
