@@ -11,5 +11,12 @@
   "search_evaluation_mode": "Tipo de avaliação",
   "search_evaluation_status": "Status da avaliação",
   "search_regions": "Regiões",
-  "search_saved_searches": "Buscas regitradas"
+  "search_saved_searches": "Buscas regitradas",
+  "settings_title": "Preferências",
+  "settings_email": "E-mail",
+  "settings_name": "Nome",
+  "settings_unit_system": "Sistema de unidade",
+  "settings_logout": "Desconectar",
+  "settings_cancel": "Cancelar",
+  "settings_apply": "Aplicar"
 }

@@ -107,3 +107,13 @@ flutter:
     - family: icon-gallery
       fonts:
         - asset: fonts/icon-gallery.otf
+    - family: Source Sans Pro
+      fonts:
+        - asset: fonts/SourceSansPro-Regular.otf
+        - asset: fonts/SourceSansPro-Bold.otf
+          weight: 700
+        - asset: fonts/SourceSansPro-It.otf
+          style: italic
+        - asset: fonts/SourceSansPro-BoldIt.otf
+          weight: 700
+          style: italic

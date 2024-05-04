@@ -11,5 +11,12 @@
   "search_evaluation_mode": "Evaluation mode",
   "search_evaluation_status": "Evaluation status",
   "search_regions": "Regions",
-  "search_saved_searches": "Saved searches"
+  "search_saved_searches": "Saved searches",
+  "settings_title": "Settings",
+  "settings_email": "E-mail",
+  "settings_name": "Name",
+  "settings_unit_system": "Unit system",
+  "settings_logout": "Logout",
+  "settings_cancel": "Cancel",
+  "settings_apply": "Apply"
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme extends InheritedWidget {
   final ShadowTheme shadowTheme;
@@ -26,15 +25,29 @@ class ShadowTheme {
 }
 
 ThemeData theme() {
-  final textTheme = TextTheme(
-      titleLarge: GoogleFonts.sourceCodePro()
-          .copyWith(fontSize: 17, fontWeight: FontWeight.bold),
-      titleSmall: GoogleFonts.sourceCodePro().copyWith(fontSize: 12));
+  const sourceSansPro = 'Source Sans Pro';
+
+  const textTheme = TextTheme(
+      titleLarge: TextStyle(
+          fontFamily: sourceSansPro,
+          fontSize: 30,
+          fontStyle: FontStyle.italic,
+          fontWeight: FontWeight.w700),
+      labelMedium: TextStyle(
+          fontFamily: sourceSansPro, fontSize: 12, fontStyle: FontStyle.italic),
+      labelLarge: TextStyle(
+          fontFamily: sourceSansPro,
+          fontSize: 18,
+          fontStyle: FontStyle.italic,
+          fontWeight: FontWeight.w700));
 
   final colorScheme = ColorScheme.fromSeed(seedColor: Colors.white).copyWith(
       shadow: Colors.black.withOpacity(0.3),
       secondaryContainer: const Color.fromARGB(0xff, 0xec, 0xee, 0xf2),
       primary: const Color.fromARGB(0xff, 0x00, 0x84, 0xff));
 
-  return ThemeData(textTheme: textTheme, colorScheme: colorScheme);
+  return ThemeData(
+      textTheme: textTheme,
+      colorScheme: colorScheme,
+      fontFamily: sourceSansPro);
 }

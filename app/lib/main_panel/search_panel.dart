@@ -38,15 +38,10 @@ class SearchPanel extends StatelessWidget {
       footer: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Button(
-            title: l10n.search_cancel,
-            width: 100,
-          ),
+          Expanded(child: Container()),
+          Expanded(child: Button(title: l10n.search_cancel)),
           _fieldVerticalDivisor(),
-          Button(
-            title: l10n.search_apply,
-            width: 100,
-          )
+          Expanded(child: Button(title: l10n.search_apply))
         ],
       ),
     );
@@ -106,6 +101,7 @@ class SearchPanel extends StatelessWidget {
 
   Widget _formField(ThemeData theme, String label, Widget content) {
     return SizedBox(
+      height: 30,
       child: Row(
         children: [
           Expanded(
@@ -123,8 +119,6 @@ class SearchPanel extends StatelessWidget {
 
   Widget _textField() {
     return const SizedBox(
-      width: 60,
-      height: 30,
       child: Placeholder(),
     );
   }
