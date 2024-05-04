@@ -1,12 +1,11 @@
 import 'dart:math';
 
 import 'package:app/components/shadow_box.dart';
-import 'package:app/panel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import 'foundation.dart';
+import 'main_panel/layer_panel.dart';
 
 typedef _WidgetBuilder = Widget Function();
 
@@ -46,20 +45,12 @@ GoRouter router({required Widget backgroundMap, required Widget topPanel}) {
         0xff, random.nextInt(0xff), random.nextInt(0xff), random.nextInt(0xff));
   }
 
-  final c1 = nextColor();
   final c2 = nextColor();
   final c3 = nextColor();
 
-  final Widget layerPanel = Builder(
-      builder: (context) => Panel(
-          iconCode: 0x61,
-          title: AppLocalizations.of(context)!.layers_title,
-          footer: placeHolder(c2),
-          content: placeHolder(c1)));
-
   return GoRouter(initialLocation: '/main', debugLogDiagnostics: true, routes: [
     routePage('/main', () => onlyTopPanel()),
-    routePage('/main/layers', () => withTopPanel(() => layerPanel)),
+    routePage('/main/layers', () => withTopPanel(() => LayerPanel())),
     routePage('/main/search', () => withTopPanel(() => placeHolder(c2))),
     routePage('/main/settings', () => withTopPanel(() => placeHolder(c3))),
   ]);

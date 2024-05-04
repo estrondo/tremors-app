@@ -5,14 +5,16 @@ import 'package:go_router/go_router.dart';
 import 'icon_gallery.dart';
 
 class Panel extends StatelessWidget {
-  final int iconCode;
   final String title;
+  final IconData icon;
   final Widget _content;
   final Widget? _footer;
 
+  static const headerHeight = 45.0;
+
   const Panel(
       {super.key,
-      required this.iconCode,
+      required this.icon,
       required this.title,
       required Widget content,
       Widget? footer})
@@ -30,12 +32,9 @@ class Panel extends StatelessWidget {
 
     return ShadowBox(
         child: Column(children: [
-      SizedBox(
-        height: 80,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [..._titleWidget(context), ..._closeWidget(context)],
-        ),
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [..._titleWidget(context), ..._closeWidget(context)],
       ),
       _divisor(context),
       _content,
@@ -46,7 +45,10 @@ class Panel extends StatelessWidget {
   List<Widget> _titleWidget(BuildContext context) {
     final theme = Theme.of(context);
     return [
-      Icon(IconGallery.layers, size: 80, color: theme.colorScheme.primary),
+      Padding(
+        padding: const EdgeInsets.only(right: 10),
+        child: Icon(icon, size: headerHeight, color: theme.colorScheme.primary),
+      ),
       Expanded(
           child: Text(
         title,
@@ -64,7 +66,7 @@ class Panel extends StatelessWidget {
             onTap: () => context.go('/main'),
             child: Icon(
               IconGallery.close,
-              size: 30,
+              size: headerHeight / 2,
               color: theme.colorScheme.primary,
             )),
       )
@@ -73,12 +75,10 @@ class Panel extends StatelessWidget {
 
   Widget _divisor(BuildContext context) {
     final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.all(5),
-      child: Container(
-        height: 10,
-        color: theme.colorScheme.secondary,
-      ),
+    return Container(
+      height: 3,
+      margin: const EdgeInsets.only(top: 10, bottom: 10),
+      color: theme.colorScheme.secondaryContainer,
     );
   }
 }

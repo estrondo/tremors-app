@@ -48,6 +48,8 @@ class Skeleton extends StatelessWidget {
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
 
+  static const height = 40.0;
+
   @override
   Widget build(BuildContext context) {
     final state = GoRouterState.of(context);
@@ -74,7 +76,7 @@ class NavBar extends StatelessWidget {
         onTap: () => context.go(path),
         child: Icon(
           iconData,
-          size: 30,
+          size: height,
           color: state.fullPath == path
               ? theme.colorScheme.inversePrimary
               : theme.colorScheme.primary,
@@ -84,21 +86,19 @@ class NavBar extends StatelessWidget {
   }
 
   Widget _divisor(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: 3,
-      height: 40,
-      child: Container(
-        color: Theme.of(context).colorScheme.secondaryContainer,
-      ),
+      height: height,
+      color: Theme.of(context).colorScheme.secondaryContainer,
     );
   }
 
   Widget _logo() {
     return const Expanded(
       child: Image(
-        width: 40,
-          height: 40,
-          image: Svg('images/logo.svg'),
+        width: height,
+        height: height,
+        image: Svg('images/logo.svg'),
       ),
     );
   }

@@ -13,7 +13,7 @@ class ShadowBox extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: theme.colorScheme.background,
           borderRadius: BorderRadius.circular(5),
