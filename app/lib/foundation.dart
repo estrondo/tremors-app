@@ -10,6 +10,14 @@ class Skeleton extends StatelessWidget {
   final Widget _background;
   final List<Widget> children;
 
+  static const padding = 5.0;
+
+  static const _divisor = SizedBox(
+    height: padding,
+  );
+
+  static final _filler = Expanded(child: Container());
+
   Skeleton.withTopPanel(
       {super.key,
       required Widget background,
@@ -18,16 +26,16 @@ class Skeleton extends StatelessWidget {
       : _background = background,
         children = [
           topPanel,
-          _skeletonTransparentFiller(),
-          mainPanel,
-          _skeletonDivisor(),
+          _divisor,
+          Expanded(child: mainPanel),
+          _divisor,
           _createNavBar()
         ];
 
   Skeleton.onlyTopPanel(
       {super.key, required Widget background, required Widget topPanel})
       : _background = background,
-        children = [topPanel, _skeletonTransparentFiller(), _createNavBar()];
+        children = [topPanel, _filler, _createNavBar()];
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +43,7 @@ class Skeleton extends StatelessWidget {
       _background,
       SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(padding),
           child: Column(
             children: children,
           ),
@@ -124,14 +132,4 @@ class RealtimePanel extends StatelessWidget {
 
 Widget _createNavBar() {
   return const NavBar();
-}
-
-Widget _skeletonTransparentFiller() {
-  return Expanded(child: Container());
-}
-
-Widget _skeletonDivisor() {
-  return const SizedBox(
-    height: 5,
-  );
 }

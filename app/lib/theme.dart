@@ -34,7 +34,7 @@ ThemeData theme() {
           fontStyle: FontStyle.italic,
           fontWeight: FontWeight.w700),
       labelMedium: TextStyle(
-          fontFamily: sourceSansPro, fontSize: 12, fontStyle: FontStyle.italic),
+          fontFamily: sourceSansPro, fontSize: 16, fontStyle: FontStyle.italic),
       labelLarge: TextStyle(
           fontFamily: sourceSansPro,
           fontSize: 18,

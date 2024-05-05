@@ -10,8 +10,7 @@ import '../panel.dart';
 class SearchPanel extends StatelessWidget {
   const SearchPanel({super.key});
 
-  static const _horizontalDivisor = SizedBox(height: 10);
-  static const _verticalDivisor = SizedBox(width: 10);
+  static const _divisor = SizedBox(height: 10);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class SearchPanel extends StatelessWidget {
               (l10n.search_regions, _regions(theme))
             ],
           ),
-          _horizontalDivisor,
+          _divisor,
           _savedSearches(theme, l10n)
         ],
       ),
@@ -70,13 +69,7 @@ class SearchPanel extends StatelessWidget {
   }
 
   Widget _range() {
-    return const Row(
-      children: [
-        Expanded(child: Placeholder()),
-        _verticalDivisor,
-        Expanded(child: Placeholder())
-      ],
-    );
+    return const Placeholder();
   }
 
   _savedSearches(ThemeData theme, AppLocalizations l10n) {
@@ -87,7 +80,7 @@ class SearchPanel extends StatelessWidget {
           l10n.search_saved_searches,
           style: theme.textTheme.labelMedium,
         ),
-        _horizontalDivisor,
+        _divisor,
         const SizedBox(height: 80, child: Placeholder())
       ],
     );

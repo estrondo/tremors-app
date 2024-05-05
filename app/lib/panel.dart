@@ -23,9 +23,11 @@ class Panel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final divisor = _divisor(context);
+
     final List<Widget> bottom;
     if (_footer != null) {
-      bottom = [_divisor(context), _footer];
+      bottom = [divisor, _footer];
     } else {
       bottom = [];
     }
@@ -39,8 +41,8 @@ class Panel extends StatelessWidget {
           children: [..._titleWidget(context), ..._closeWidget(context)],
         ),
       ),
-      _divisor(context),
-      _content,
+      divisor,
+      Expanded(child: SingleChildScrollView(child: _content)),
       ...bottom
     ]));
   }

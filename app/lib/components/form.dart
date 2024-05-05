@@ -26,11 +26,11 @@ class Form extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: Text(e.$1, style: theme.textTheme.labelMedium),
                   ),
                   Expanded(
-                    flex: 2,
+                    flex: 1,
                     child: e.$2,
                   )
                 ],
