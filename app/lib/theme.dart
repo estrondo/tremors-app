@@ -44,7 +44,8 @@ ThemeData theme() {
   final colorScheme = ColorScheme.fromSeed(seedColor: Colors.white).copyWith(
       shadow: Colors.black.withOpacity(0.3),
       secondaryContainer: const Color.fromARGB(0xff, 0xec, 0xee, 0xf2),
-      primary: const Color.fromARGB(0xff, 0x00, 0x84, 0xff));
+      primary: const Color.fromARGB(0xff, 0x00, 0x84, 0xff),
+      tertiary: const Color.fromARGB(0xff, 0xd7, 0xd7, 0xda));
 
   return ThemeData(
       textTheme: textTheme,

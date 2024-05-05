@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' hide Form;
+import 'package:flutter/material.dart' hide Form, FormField;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/button.dart';
@@ -16,19 +16,23 @@ class SearchPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = localization(context);
     final theme = Theme.of(context);
+
+    const placeHolder = Placeholder();
     return Panel(
       icon: IconGallery.search,
       title: l10n.search_title,
       content: Column(
         children: [
           Form(
+            title: l10n.search_title,
             entries: [
-              (l10n.search_magnitude_range, _magnitudeRange(theme)),
-              (l10n.search_magnitude_type, _magnitudeType(theme)),
-              (l10n.search_station_count, _stationCount(theme)),
-              (l10n.search_evaluation_mode, _evaluationMode(theme)),
-              (l10n.search_evaluation_status, _evaluationStatus(theme)),
-              (l10n.search_regions, _regions(theme))
+              FormEntry(l10n.search_magnitude_range, placeHolder, placeHolder),
+              FormEntry(l10n.search_magnitude_type, placeHolder, placeHolder),
+              FormEntry(l10n.search_station_count, placeHolder, placeHolder),
+              FormEntry(l10n.search_evaluation_mode, placeHolder, placeHolder),
+              FormEntry(
+                  l10n.search_evaluation_status, placeHolder, placeHolder),
+              FormEntry(l10n.search_regions, placeHolder, placeHolder)
             ],
           ),
           _divisor,
@@ -37,39 +41,10 @@ class SearchPanel extends StatelessWidget {
       ),
       footer: FormFooter(
         children: [
-          Button(title: l10n.search_cancel),
           Button(title: l10n.search_apply)
         ],
       ),
     );
-  }
-
-  Widget _magnitudeRange(ThemeData theme) {
-    return _range();
-  }
-
-  Widget _magnitudeType(ThemeData theme) {
-    return const Placeholder();
-  }
-
-  Widget _stationCount(ThemeData theme) {
-    return _range();
-  }
-
-  Widget _evaluationMode(ThemeData theme) {
-    return const Placeholder();
-  }
-
-  Widget _evaluationStatus(ThemeData theme) {
-    return const Placeholder();
-  }
-
-  Widget _regions(ThemeData theme) {
-    return const SizedBox(height: 120, child: Placeholder());
-  }
-
-  Widget _range() {
-    return const Placeholder();
   }
 
   _savedSearches(ThemeData theme, AppLocalizations l10n) {

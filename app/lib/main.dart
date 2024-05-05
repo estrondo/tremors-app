@@ -16,7 +16,8 @@ void main() {
     localizationsDelegates: const [
       AppLocalizations.delegate,
       GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate
     ],
     supportedLocales: const [Locale("en"), Locale("pt")],
   );

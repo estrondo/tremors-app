@@ -4,7 +4,6 @@
   "layers_additional_maps_title": "Additional Maps Information",
   "search_title": "Search",
   "search_apply": "Apply",
-  "search_cancel": "Cancel",
   "search_magnitude_range": "Magnitude Range",
   "search_magnitude_type": "Magnitude type",
   "search_station_count": "Station count",
@@ -17,6 +16,5 @@
   "settings_name": "Name",
   "settings_unit_system": "Unit system",
   "settings_logout": "Logout",
-  "settings_cancel": "Cancel",
   "settings_apply": "Apply"
 }

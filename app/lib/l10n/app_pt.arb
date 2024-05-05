@@ -4,7 +4,6 @@
   "layers_additional_maps_title": "Camadas adicionais",
   "search_title": "Procurar",
   "search_apply": "Aplicar",
-  "search_cancel": "Cancelar",
   "search_magnitude_range": "Intervalo de magnitudes",
   "search_magnitude_type": "Tipo de magnitude",
   "search_station_count": "Quantidades de estações",
@@ -16,7 +15,6 @@
   "settings_email": "E-mail",
   "settings_name": "Nome",
   "settings_unit_system": "Sistema de unidade",
-  "settings_logout": "Desconectar",
-  "settings_cancel": "Cancelar",
+  "settings_logout": "Sair",
   "settings_apply": "Aplicar"
 }
