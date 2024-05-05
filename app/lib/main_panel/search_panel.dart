@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Form;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/button.dart';
+import '../components/form.dart';
 import '../icon_gallery.dart';
 import '../localization.dart';
 import '../panel.dart';
@@ -9,7 +10,8 @@ import '../panel.dart';
 class SearchPanel extends StatelessWidget {
   const SearchPanel({super.key});
 
-  static const _fieldDivisorSize = 10.0;
+  static const _horizontalDivisor = SizedBox(height: 10);
+  static const _verticalDivisor = SizedBox(width: 10);
 
   @override
   Widget build(BuildContext context) {
@@ -20,57 +22,61 @@ class SearchPanel extends StatelessWidget {
       title: l10n.search_title,
       content: Column(
         children: [
-          _magnitudeRange(theme, l10n),
-          _fieldHorizontalDivisor(),
-          _magnitudeType(theme, l10n),
-          _fieldHorizontalDivisor(),
-          _stationCount(theme, l10n),
-          _fieldHorizontalDivisor(),
-          _evaluationMode(theme, l10n),
-          _fieldHorizontalDivisor(),
-          _evaluationStatus(theme, l10n),
-          _fieldHorizontalDivisor(),
-          _region(theme, l10n),
-          _fieldHorizontalDivisor(),
+          Form(
+            entries: [
+              (l10n.search_magnitude_range, _magnitudeRange(theme)),
+              (l10n.search_magnitude_type, _magnitudeType(theme)),
+              (l10n.search_station_count, _stationCount(theme)),
+              (l10n.search_evaluation_mode, _evaluationMode(theme)),
+              (l10n.search_evaluation_status, _evaluationStatus(theme)),
+              (l10n.search_regions, _regions(theme))
+            ],
+          ),
+          _horizontalDivisor,
           _savedSearches(theme, l10n)
         ],
       ),
-      footer: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+      footer: FormFooter(
         children: [
-          Expanded(child: Container()),
-          Expanded(child: Button(title: l10n.search_cancel)),
-          _fieldVerticalDivisor(),
-          Expanded(child: Button(title: l10n.search_apply))
+          Button(title: l10n.search_cancel),
+          Button(title: l10n.search_apply)
         ],
       ),
     );
   }
 
-  Widget _magnitudeRange(ThemeData theme, AppLocalizations l10n) {
-    return _formField(theme, l10n.search_magnitude_range, _rangeInput());
+  Widget _magnitudeRange(ThemeData theme) {
+    return _range();
   }
 
-  Widget _magnitudeType(ThemeData theme, AppLocalizations l10n) {
-    return _formField(theme, l10n.search_magnitude_type, _textField());
-    ;
+  Widget _magnitudeType(ThemeData theme) {
+    return const Placeholder();
   }
 
-  Widget _stationCount(ThemeData theme, AppLocalizations l10n) {
-    return _formField(theme, l10n.search_station_count, _rangeInput());
+  Widget _stationCount(ThemeData theme) {
+    return _range();
   }
 
-  Widget _evaluationMode(ThemeData theme, AppLocalizations l10n) {
-    return _formField(theme, l10n.search_evaluation_mode, _textField());
+  Widget _evaluationMode(ThemeData theme) {
+    return const Placeholder();
   }
 
-  Widget _evaluationStatus(ThemeData theme, AppLocalizations l10n) {
-    return _formField(theme, l10n.search_evaluation_status, _textField());
+  Widget _evaluationStatus(ThemeData theme) {
+    return const Placeholder();
   }
 
-  _region(ThemeData theme, AppLocalizations l10n) {
-    return _formField(theme, l10n.search_regions,
-        const SizedBox(height: 150, child: Placeholder()));
+  Widget _regions(ThemeData theme) {
+    return const SizedBox(height: 120, child: Placeholder());
+  }
+
+  Widget _range() {
+    return const Row(
+      children: [
+        Expanded(child: Placeholder()),
+        _verticalDivisor,
+        Expanded(child: Placeholder())
+      ],
+    );
   }
 
   _savedSearches(ThemeData theme, AppLocalizations l10n) {
@@ -81,54 +87,8 @@ class SearchPanel extends StatelessWidget {
           l10n.search_saved_searches,
           style: theme.textTheme.labelMedium,
         ),
-        _fieldHorizontalDivisor(),
+        _horizontalDivisor,
         const SizedBox(height: 80, child: Placeholder())
-      ],
-    );
-  }
-
-  _fieldHorizontalDivisor() {
-    return const SizedBox(
-      height: _fieldDivisorSize,
-    );
-  }
-
-  _fieldVerticalDivisor() {
-    return const SizedBox(
-      width: _fieldDivisorSize,
-    );
-  }
-
-  Widget _formField(ThemeData theme, String label, Widget content) {
-    return SizedBox(
-      height: 30,
-      child: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Text(
-              label,
-              style: theme.textTheme.labelMedium,
-            ),
-          ),
-          Expanded(flex: 2, child: content)
-        ],
-      ),
-    );
-  }
-
-  Widget _textField() {
-    return const SizedBox(
-      child: Placeholder(),
-    );
-  }
-
-  Widget _rangeInput() {
-    return Row(
-      children: [
-        Expanded(child: _textField()),
-        _fieldVerticalDivisor(),
-        Expanded(child: _textField())
       ],
     );
   }

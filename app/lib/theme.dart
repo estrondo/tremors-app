@@ -30,7 +30,7 @@ ThemeData theme() {
   const textTheme = TextTheme(
       titleLarge: TextStyle(
           fontFamily: sourceSansPro,
-          fontSize: 30,
+          fontSize: 20,
           fontStyle: FontStyle.italic,
           fontWeight: FontWeight.w700),
       labelMedium: TextStyle(

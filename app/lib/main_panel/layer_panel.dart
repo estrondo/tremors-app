@@ -62,7 +62,7 @@ class _AdditionalListState extends State<_AdditionalList> {
   @override
   Widget build(BuildContext context) {
     return const SizedBox(
-      height: 250,
+      height: 240,
       child: Placeholder(),
     );
   }

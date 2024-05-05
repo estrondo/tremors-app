@@ -10,7 +10,7 @@ class Panel extends StatelessWidget {
   final Widget _content;
   final Widget? _footer;
 
-  static const headerHeight = 45.0;
+  static const headerHeight = 40.0;
 
   const Panel(
       {super.key,
@@ -49,7 +49,7 @@ class Panel extends StatelessWidget {
     final theme = Theme.of(context);
     return [
       Padding(
-        padding: const EdgeInsets.only(right: 10),
+        padding: const EdgeInsets.only(right: 5),
         child: Icon(icon, size: headerHeight, color: theme.colorScheme.primary),
       ),
       Expanded(

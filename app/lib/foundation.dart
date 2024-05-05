@@ -48,7 +48,7 @@ class Skeleton extends StatelessWidget {
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
 
-  static const height = 40.0;
+  static const height = 30.0;
 
   @override
   Widget build(BuildContext context) {
