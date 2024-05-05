@@ -16,5 +16,6 @@
   "settings_name": "Nome",
   "settings_unit_system": "Sistema de unidade",
   "settings_logout": "Sair",
-  "settings_apply": "Aplicar"
+  "settings_apply": "Aplicar",
+  "realtime_title": "O que está acontecendo?"
 }

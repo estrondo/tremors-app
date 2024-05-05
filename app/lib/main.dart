@@ -11,7 +11,7 @@ void main() {
   final app = MaterialApp.router(
     color: Colors.redAccent,
     routerConfig: router(
-        backgroundMap: const BackgroundMap(), topPanel: const RealtimePanel()),
+        backgroundMap: const BackgroundMap(), topPanel: const RealtimeTopPanel()),
     theme: theme(),
     localizationsDelegates: const [
       AppLocalizations.delegate,

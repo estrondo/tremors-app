@@ -68,7 +68,7 @@ class Panel extends StatelessWidget {
       Align(
         alignment: Alignment.topRight,
         child: GestureDetector(
-            onTap: () => context.go('/main'),
+            onTap: () => context.go('/'),
             child: Icon(
               IconGallery.close,
               size: headerHeight / 2,

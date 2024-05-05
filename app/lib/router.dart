@@ -47,10 +47,10 @@ GoRouter router({required Widget backgroundMap, required Widget topPanel}) {
         0xff, random.nextInt(0xff), random.nextInt(0xff), random.nextInt(0xff));
   }
 
-  return GoRouter(initialLocation: '/main', debugLogDiagnostics: true, routes: [
-    routePage('/main', () => onlyTopPanel()),
-    routePage('/main/layers', () => withTopPanel(() => const LayerPanel())),
-    routePage('/main/search', () => withTopPanel(() => const SearchPanel())),
-    routePage('/main/settings', () => withTopPanel(() => const SettingsPanel())),
+  return GoRouter(debugLogDiagnostics: true, routes: [
+    routePage('/', () => onlyTopPanel()),
+    routePage('/layers', () => withTopPanel(() => const LayerPanel())),
+    routePage('/search', () => withTopPanel(() => const SearchPanel())),
+    routePage('/settings', () => withTopPanel(() => const SettingsPanel())),
   ]);
 }

@@ -16,5 +16,6 @@
   "settings_name": "Name",
   "settings_unit_system": "Unit system",
   "settings_logout": "Logout",
-  "settings_apply": "Apply"
+  "settings_apply": "Apply",
+  "realtime_title": "What's happening?"
 }

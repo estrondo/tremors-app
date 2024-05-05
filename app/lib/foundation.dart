@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'components/shadow_box.dart';
 import 'icon_gallery.dart';
+import 'localization.dart';
 
 /// The application skeleton.
 class Skeleton extends StatelessWidget {
@@ -66,10 +67,10 @@ class NavBar extends StatelessWidget {
     return ShadowBox(
       child: Row(
         children: [
-          _button(IconGallery.layers, '/main/layers', context, state, theme),
-          _button(IconGallery.search, '/main/search', context, state, theme),
+          _button(IconGallery.layers, '/layers', context, state, theme),
+          _button(IconGallery.search, '/search', context, state, theme),
           _button(
-              IconGallery.settings, '/main/settings', context, state, theme),
+              IconGallery.settings, '/settings', context, state, theme),
           _divisor(context),
           _logo()
         ],
@@ -112,19 +113,37 @@ class NavBar extends StatelessWidget {
   }
 }
 
-class RealtimePanel extends StatelessWidget {
-  const RealtimePanel({super.key});
+class RealtimeTopPanel extends StatelessWidget {
+  const RealtimeTopPanel({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = localization(context);
+    final theme = Theme.of(context);
     return ShadowBox(
-      child: Row(
-        children: [
-          Text(
-            'Realtime',
-            style: Theme.of(context).textTheme.titleSmall,
-          )
-        ],
+      child: GestureDetector(
+        onTap: () {
+          context.go('/realtime');
+        },
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                l10n.realtime_title,
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+            ),
+            Icon(IconGallery.dateTime,
+                size: 20, color: theme.colorScheme.secondary),
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Text(
+                "2025-06-24T13:12:22 -03",
+                style: theme.textTheme.titleSmall,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
