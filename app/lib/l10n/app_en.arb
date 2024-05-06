@@ -17,5 +17,9 @@
   "settings_unit_system": "Unit system",
   "settings_logout": "Logout",
   "settings_apply": "Apply",
-  "realtime_title": "What's happening?"
+  "realtime_title": "What's happening?",
+  "realtime_histogram_title": "Events histogram from",
+  "realtime_select_region": "Select a region",
+  "realtime_the_largest": "The largest",
+  "realtime_close": "Close"
 }

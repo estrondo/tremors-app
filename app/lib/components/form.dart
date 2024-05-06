@@ -3,21 +3,25 @@ import 'package:flutter/material.dart';
 
 import '../icon_gallery.dart';
 
-class FormEntry {
-  final String title;
-  final Widget presentation;
-  final Widget? editor;
+typedef FieldEditorBuilder = Widget Function(BuildContext);
+typedef StringBuilder = String Function(BuildContext);
 
-  FormEntry(this.title, this.presentation, [this.editor]);
+class FieldData {
+  final StringBuilder title;
+  final Widget presentation;
+  final FieldEditorBuilder? builder;
+
+  FieldData(this.title, this.presentation, [this.builder]);
 }
 
 class Form extends StatelessWidget {
-  final List<FormEntry> _entries;
-  final String title;
+  final List<FieldData> _fields;
+  final StringBuilder title;
 
   static const rowHeight = 30.0;
-  const Form({super.key, required this.title, required List<FormEntry> entries})
-      : _entries = entries;
+
+  const Form({super.key, required this.title, required List<FieldData> fields})
+      : _fields = fields;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class Form extends StatelessWidget {
         height: 1);
 
     final children =
-        _entries.mapInterpolated((e) => FormField(e, title), divisor);
+        _fields.mapInterpolated((e) => FormField(e, title), divisor);
     return Column(children: children);
   }
 }
@@ -45,7 +49,7 @@ class FormFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     final children = _children.mapInterpolated(
         (e) => Expanded(
-              flex: 4,
+              flex: 5,
               child: e,
             ),
         _rowDivisor);
@@ -64,10 +68,10 @@ class FormFooter extends StatelessWidget {
 }
 
 class FormField extends StatelessWidget {
-  final FormEntry entry;
-  final String title;
+  final FieldData field;
+  final StringBuilder title;
 
-  const FormField(this.entry, this.title, {super.key});
+  const FormField(this.field, this.title, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,19 +80,19 @@ class FormField extends StatelessWidget {
       Expanded(
         flex: 3,
         child: Text(
-          entry.title,
+          field.title(context),
           style: theme.textTheme.labelMedium,
         ),
       ),
       Expanded(
         flex: 1,
-        child: entry.presentation,
+        child: field.presentation,
       ),
       Padding(
         padding: const EdgeInsets.only(left: 5),
-        child: (entry.editor != null)
+        child: (field.builder != null)
             ? Icon(
-                IconGallery.regularRightArrow,
+                IconGallery.boldRightArrow,
                 size: Form.rowHeight / 3,
                 color: theme.colorScheme.tertiary,
               )
@@ -99,29 +103,29 @@ class FormField extends StatelessWidget {
       )
     ]);
 
-    if (entry.editor != null) {
+    if (field.builder != null) {
       row = GestureDetector(
         onTap: () => _edit(context),
         child: row,
       );
     }
 
-    return (entry.presentation is! SizedBox)
+    return (field.presentation is! SizedBox)
         ? SizedBox(height: Form.rowHeight, child: row)
         : row;
   }
 
   void _edit(BuildContext context) {
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (_) => EditorPage(entry, title)));
+        .push(MaterialPageRoute(builder: (_) => FieldEditor(field, title)));
   }
 }
 
-class EditorPage extends StatelessWidget {
-  final FormEntry entry;
-  final String title;
+class FieldEditor extends StatelessWidget {
+  final FieldData field;
+  final StringBuilder title;
 
-  const EditorPage(this.entry, this.title, {super.key});
+  const FieldEditor(this.field, this.title, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -148,16 +152,16 @@ class EditorPage extends StatelessWidget {
                   color: theme.colorScheme.tertiary,
                 ),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(entry.title, style: theme.textTheme.titleLarge),
+                  Text(field.title(context), style: theme.textTheme.displayLarge),
                   Text(
-                    title,
-                    style: theme.textTheme.titleSmall,
+                    title(context),
+                    style: theme.textTheme.displayMedium,
                   ),
                 ])
               ])),
             ),
             spacer,
-            entry.editor!
+            Builder(builder: field.builder!)
           ])),
     );
   }

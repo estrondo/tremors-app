@@ -1,27 +1,21 @@
-import 'dart:math';
-
-import 'package:app/components/shadow_box.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'foundation.dart';
 import 'main_panel/layer_panel.dart';
+import 'main_panel/realtime_panel.dart';
 import 'main_panel/search_panel.dart';
 import 'main_panel/settings_panel.dart';
 
 typedef _WidgetBuilder = Widget Function();
 
 GoRouter router({required Widget backgroundMap, required Widget topPanel}) {
-  GoRoute routeWidget(String path, _WidgetBuilder builder) {
-    return GoRoute(path: path, builder: (_, __) => builder());
-  }
-
   GoRoute routePage(String path, _WidgetBuilder builder) {
     return GoRoute(
         path: path, pageBuilder: (_, __) => MaterialPage(child: builder()));
   }
 
-  Widget onlyTopPanel() {
+  Widget mainPage() {
     return Skeleton.onlyTopPanel(background: backgroundMap, topPanel: topPanel);
   }
 
@@ -33,24 +27,15 @@ GoRouter router({required Widget backgroundMap, required Widget topPanel}) {
     );
   }
 
-  Widget placeHolder(Color color) {
-    return ShadowBox(
-        child: Container(
-      color: color,
-      height: 100,
-    ));
-  }
-
-  Color nextColor() {
-    final random = Random();
-    return Color.fromARGB(
-        0xff, random.nextInt(0xff), random.nextInt(0xff), random.nextInt(0xff));
+  Widget onlyTopPanel(Widget panel) {
+    return Skeleton.singlePanel(background: backgroundMap, panel: panel);
   }
 
   return GoRouter(debugLogDiagnostics: true, routes: [
-    routePage('/', () => onlyTopPanel()),
+    routePage('/', () => mainPage()),
     routePage('/layers', () => withTopPanel(() => const LayerPanel())),
     routePage('/search', () => withTopPanel(() => const SearchPanel())),
     routePage('/settings', () => withTopPanel(() => const SettingsPanel())),
+    routePage('/realtime', () => onlyTopPanel(const RealtimePanel()))
   ]);
 }

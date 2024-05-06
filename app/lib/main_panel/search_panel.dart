@@ -24,15 +24,20 @@ class SearchPanel extends StatelessWidget {
       content: Column(
         children: [
           Form(
-            title: l10n.search_title,
-            entries: [
-              FormEntry(l10n.search_magnitude_range, placeHolder, placeHolder),
-              FormEntry(l10n.search_magnitude_type, placeHolder, placeHolder),
-              FormEntry(l10n.search_station_count, placeHolder, placeHolder),
-              FormEntry(l10n.search_evaluation_mode, placeHolder, placeHolder),
-              FormEntry(
-                  l10n.search_evaluation_status, placeHolder, placeHolder),
-              FormEntry(l10n.search_regions, placeHolder, placeHolder)
+            title: intOf((_) => _.search_title),
+            fields: [
+              FieldData(intOf((_) => _.search_magnitude_range), placeHolder,
+                  (_) => placeHolder),
+              FieldData(intOf((_) => _.search_magnitude_type), placeHolder,
+                  (_) => placeHolder),
+              FieldData(intOf((_) => _.search_station_count), placeHolder,
+                  (_) => placeHolder),
+              FieldData(intOf((_) => _.search_evaluation_mode), placeHolder,
+                  (_) => placeHolder),
+              FieldData(intOf((_) => _.search_evaluation_status), placeHolder,
+                  (_) => placeHolder),
+              FieldData(intOf((_) => _.search_regions), placeHolder,
+                  (_) => placeHolder)
             ],
           ),
           _divisor,
@@ -40,9 +45,7 @@ class SearchPanel extends StatelessWidget {
         ],
       ),
       footer: FormFooter(
-        children: [
-          Button(title: l10n.search_apply)
-        ],
+        children: [Button(title: l10n.search_apply)],
       ),
     );
   }
@@ -53,7 +56,7 @@ class SearchPanel extends StatelessWidget {
       children: [
         Text(
           l10n.search_saved_searches,
-          style: theme.textTheme.labelMedium,
+          style: theme.textTheme.labelLarge,
         ),
         _divisor,
         const SizedBox(height: 80, child: Placeholder())

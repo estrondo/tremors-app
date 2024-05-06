@@ -27,19 +27,29 @@ class ShadowTheme {
 ThemeData theme() {
   const sourceSansPro = 'Source Sans Pro';
 
-  const textTheme = TextTheme(
-      titleLarge: TextStyle(
-          fontFamily: sourceSansPro,
-          fontSize: 20,
-          fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.w700),
-      labelMedium: TextStyle(
-          fontFamily: sourceSansPro, fontSize: 16, fontStyle: FontStyle.italic),
-      labelLarge: TextStyle(
-          fontFamily: sourceSansPro,
-          fontSize: 18,
-          fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.w700));
+  const baseStyle = TextStyle(fontFamily: sourceSansPro, fontSize: 10);
+
+  final boldAndItalic = baseStyle.copyWith(
+      fontStyle: FontStyle.italic, fontWeight: FontWeight.w700);
+
+  final italic = baseStyle.copyWith(fontStyle: FontStyle.italic);
+
+  final textTheme = TextTheme(
+      displayLarge: boldAndItalic.copyWith(fontSize: 20),
+      displayMedium: italic.copyWith(fontSize: 14),
+      displaySmall: baseStyle,
+      headlineLarge: baseStyle,
+      headlineMedium: boldAndItalic,
+      headlineSmall: baseStyle,
+      titleLarge: baseStyle,
+      titleMedium: baseStyle,
+      titleSmall: baseStyle,
+      bodyLarge: baseStyle,
+      bodyMedium: baseStyle,
+      bodySmall: baseStyle,
+      labelLarge: boldAndItalic.copyWith(fontSize: 14),
+      labelMedium: italic.copyWith(fontSize: 12),
+      labelSmall: baseStyle);
 
   final colorScheme = ColorScheme.fromSeed(seedColor: Colors.white).copyWith(
       shadow: Colors.black.withOpacity(0.3),

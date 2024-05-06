@@ -12,19 +12,19 @@ class SettingsPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = localization(context);
-    final theme = Theme.of(context);
-
     const placeHolder = Placeholder();
 
     return Panel(
       icon: IconGallery.settings,
       title: l10n.settings_title,
       content: Form(
-        title: l10n.settings_title,
-        entries: [
-          FormEntry(l10n.settings_email, placeHolder),
-          FormEntry(l10n.settings_name, placeHolder, placeHolder),
-          FormEntry(l10n.settings_unit_system, placeHolder, placeHolder)
+        title: intOf((_) => _.settings_title),
+        fields: [
+          FieldData(intOf((_) => _.settings_email), placeHolder),
+          FieldData(
+              intOf((_) => _.settings_name), placeHolder, (_) => placeHolder),
+          FieldData(intOf((_) => _.settings_unit_system), placeHolder,
+              (_) => placeHolder)
         ],
       ),
       footer: FormFooter(

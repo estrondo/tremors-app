@@ -57,7 +57,7 @@ class Panel extends StatelessWidget {
       Expanded(
           child: Text(
         title,
-        style: theme.textTheme.titleLarge,
+        style: theme.textTheme.displayLarge,
       )),
     ];
   }

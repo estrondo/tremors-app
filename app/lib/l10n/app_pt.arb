@@ -17,5 +17,9 @@
   "settings_unit_system": "Sistema de unidade",
   "settings_logout": "Sair",
   "settings_apply": "Aplicar",
-  "realtime_title": "O que está acontecendo?"
+  "realtime_title": "O que está acontecendo?",
+  "realtime_histogram_title": "Histograma de eventos desde",
+  "realtime_select_region": "Selecionar uma região",
+  "realtime_the_largest": "Os maiores",
+  "realtime_close": "Fechar"
 }

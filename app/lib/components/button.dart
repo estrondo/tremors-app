@@ -18,8 +18,8 @@ class Button extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: theme.textTheme.labelLarge?.copyWith(
-              color: theme.colorScheme.surface, fontWeight: FontWeight.bold),
+          style: theme.textTheme.labelLarge
+              ?.copyWith(color: theme.colorScheme.onPrimary),
         ),
       ),
     );

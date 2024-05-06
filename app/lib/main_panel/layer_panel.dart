@@ -20,7 +20,7 @@ class LayerPanel extends StatelessWidget {
         children: [
           Text(
             l10n.layers_background_maps_title,
-            style: textTheme.titleMedium,
+            style: textTheme.labelLarge,
           ),
           _BackgroundList(),
           const SizedBox(
@@ -28,7 +28,7 @@ class LayerPanel extends StatelessWidget {
           ),
           Text(
             l10n.layers_additional_maps_title,
-            style: textTheme.titleMedium,
+            style: textTheme.labelLarge,
           ),
           _AdditionalList()
         ],

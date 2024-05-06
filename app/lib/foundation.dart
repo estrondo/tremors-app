@@ -17,7 +17,7 @@ class Skeleton extends StatelessWidget {
     height: padding,
   );
 
-  static final _filler = Expanded(child: Container());
+  static const _filler = Spacer();
 
   Skeleton.withTopPanel(
       {super.key,
@@ -38,6 +38,10 @@ class Skeleton extends StatelessWidget {
       : _background = background,
         children = [topPanel, _filler, _createNavBar()];
 
+  Skeleton.singlePanel({super.key, required background, required Widget panel})
+      : _background = background,
+        children = [Expanded(child: panel), _divisor, _createNavBar()];
+
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -57,7 +61,7 @@ class Skeleton extends StatelessWidget {
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
 
-  static const height = 30.0;
+  static const height = 28.0;
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +73,7 @@ class NavBar extends StatelessWidget {
         children: [
           _button(IconGallery.layers, '/layers', context, state, theme),
           _button(IconGallery.search, '/search', context, state, theme),
-          _button(
-              IconGallery.settings, '/settings', context, state, theme),
+          _button(IconGallery.settings, '/settings', context, state, theme),
           _divisor(context),
           _logo()
         ],
@@ -130,7 +133,7 @@ class RealtimeTopPanel extends StatelessWidget {
             Expanded(
               child: Text(
                 l10n.realtime_title,
-                style: Theme.of(context).textTheme.titleSmall,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
             Icon(IconGallery.dateTime,
@@ -138,8 +141,8 @@ class RealtimeTopPanel extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 5),
               child: Text(
-                "2025-06-24T13:12:22 -03",
-                style: theme.textTheme.titleSmall,
+                "2025-06-24T13:12:22 UTC -03",
+                style: theme.textTheme.headlineMedium,
               ),
             ),
           ],
