@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:go_router/go_router.dart';
 
+import 'components/realtime_clock.dart';
 import 'components/shadow_box.dart';
 import 'icon_gallery.dart';
-import 'localization.dart';
 
 /// The application skeleton.
 class Skeleton extends StatelessWidget {
@@ -19,6 +19,8 @@ class Skeleton extends StatelessWidget {
 
   static const _filler = Spacer();
 
+  static const _navBar = NavBar();
+
   Skeleton.withTopPanel(
       {super.key,
       required Widget background,
@@ -30,17 +32,17 @@ class Skeleton extends StatelessWidget {
           _divisor,
           Expanded(child: mainPanel),
           _divisor,
-          _createNavBar()
+          _navBar
         ];
 
   Skeleton.onlyTopPanel(
       {super.key, required Widget background, required Widget topPanel})
       : _background = background,
-        children = [topPanel, _filler, _createNavBar()];
+        children = [topPanel, _filler, _navBar];
 
   Skeleton.singlePanel({super.key, required background, required Widget panel})
       : _background = background,
-        children = [Expanded(child: panel), _divisor, _createNavBar()];
+        children = [Expanded(child: panel), _divisor, _navBar];
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,7 @@ class Skeleton extends StatelessWidget {
             children: children,
           ),
         ),
-      )
+      ),
     ]);
   }
 }
@@ -61,12 +63,26 @@ class Skeleton extends StatelessWidget {
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
 
-  static const height = 28.0;
+  static const height = 25.0;
+
+  static const _logo = Expanded(
+    child: Image(
+      width: height,
+      height: height,
+      image: Svg('images/logo.svg'),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
     final state = GoRouterState.of(context);
     final theme = Theme.of(context);
+
+    final divisor = Container(
+      width: 3,
+      height: height,
+      color: theme.colorScheme.secondaryContainer,
+    );
 
     return ShadowBox(
       child: Row(
@@ -74,8 +90,8 @@ class NavBar extends StatelessWidget {
           _button(IconGallery.layers, '/layers', context, state, theme),
           _button(IconGallery.search, '/search', context, state, theme),
           _button(IconGallery.settings, '/settings', context, state, theme),
-          _divisor(context),
-          _logo()
+          divisor,
+          _logo
         ],
       ),
     );
@@ -96,24 +112,6 @@ class NavBar extends StatelessWidget {
       ),
     );
   }
-
-  Widget _divisor(BuildContext context) {
-    return Container(
-      width: 3,
-      height: height,
-      color: Theme.of(context).colorScheme.secondaryContainer,
-    );
-  }
-
-  Widget _logo() {
-    return const Expanded(
-      child: Image(
-        width: height,
-        height: height,
-        image: Svg('images/logo.svg'),
-      ),
-    );
-  }
 }
 
 class RealtimeTopPanel extends StatelessWidget {
@@ -121,37 +119,12 @@ class RealtimeTopPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = localization(context);
-    final theme = Theme.of(context);
     return ShadowBox(
       child: GestureDetector(
-        onTap: () {
-          context.go('/realtime');
-        },
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                l10n.realtime_title,
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ),
-            Icon(IconGallery.dateTime,
-                size: 20, color: theme.colorScheme.secondary),
-            Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: Text(
-                "2025-06-24T13:12:22 UTC -03",
-                style: theme.textTheme.headlineMedium,
-              ),
-            ),
-          ],
-        ),
-      ),
+          onTap: () {
+            context.go('/realtime');
+          },
+          child: const RealtimeClock()),
     );
   }
-}
-
-Widget _createNavBar() {
-  return const NavBar();
 }

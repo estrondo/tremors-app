@@ -1,7 +1,7 @@
-import 'package:app/components/shadow_box.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'components/shadow_box.dart';
 import 'icon_gallery.dart';
 
 class Panel extends StatelessWidget {
@@ -23,7 +23,13 @@ class Panel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final divisor = _divisor(context);
+    final theme = Theme.of(context);
+
+    final divisor = Container(
+      height: 3,
+      margin: const EdgeInsets.only(top: 10, bottom: 10),
+      color: theme.colorScheme.secondaryContainer,
+    );
 
     final List<Widget> bottom;
     if (_footer != null) {
@@ -76,14 +82,5 @@ class Panel extends StatelessWidget {
             )),
       )
     ];
-  }
-
-  Widget _divisor(BuildContext context) {
-    final theme = Theme.of(context);
-    return Container(
-      height: 3,
-      margin: const EdgeInsets.only(top: 10, bottom: 10),
-      color: theme.colorScheme.secondaryContainer,
-    );
   }
 }

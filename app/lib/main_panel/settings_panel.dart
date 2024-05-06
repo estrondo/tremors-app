@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide Form;
 
 import '../components/button.dart';
+import '../components/footer.dart';
 import '../components/form.dart';
 import '../icon_gallery.dart';
 import '../localization.dart';
@@ -27,7 +28,7 @@ class SettingsPanel extends StatelessWidget {
               (_) => placeHolder)
         ],
       ),
-      footer: FormFooter(
+      footer: Footer(
         children: [
           Button(title: l10n.settings_logout),
           Button(title: l10n.settings_apply)

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Form, FormField;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/button.dart';
+import '../components/footer.dart';
 import '../components/form.dart';
 import '../icon_gallery.dart';
 import '../localization.dart';
@@ -44,7 +45,7 @@ class SearchPanel extends StatelessWidget {
           _savedSearches(theme, l10n)
         ],
       ),
-      footer: FormFooter(
+      footer: Footer(
         children: [Button(title: l10n.search_apply)],
       ),
     );

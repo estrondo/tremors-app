@@ -6,6 +6,8 @@ import '../icon_gallery.dart';
 typedef FieldEditorBuilder = Widget Function(BuildContext);
 typedef StringBuilder = String Function(BuildContext);
 
+const rowHeight = 30;
+
 class FieldData {
   final StringBuilder title;
   final Widget presentation;
@@ -18,8 +20,6 @@ class Form extends StatelessWidget {
   final List<FieldData> _fields;
   final StringBuilder title;
 
-  static const rowHeight = 30.0;
-
   const Form({super.key, required this.title, required List<FieldData> fields})
       : _fields = fields;
 
@@ -30,40 +30,10 @@ class Form extends StatelessWidget {
         color: Theme.of(context).colorScheme.tertiary,
         height: 1);
 
-    final children =
-        _fields.mapInterpolated((e) => FormField(e, title), divisor);
+    final children = _fields
+        .mapInterpolated((e) => FormField(e, title), divisor, addAfter: true);
+
     return Column(children: children);
-  }
-}
-
-class FormFooter extends StatelessWidget {
-  static const _rowHeight = 40.0;
-  static const _rowDivisor = SizedBox(width: 10);
-
-  final List<Widget> _children;
-
-  const FormFooter({super.key, required List<Widget> children})
-      : _children = children;
-
-  @override
-  Widget build(BuildContext context) {
-    final children = _children.mapInterpolated(
-        (e) => Expanded(
-              flex: 5,
-              child: e,
-            ),
-        _rowDivisor);
-
-    return SizedBox(
-      height: _rowHeight,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(flex: _children.length, child: Container()),
-          ...children
-        ],
-      ),
-    );
   }
 }
 
@@ -93,12 +63,12 @@ class FormField extends StatelessWidget {
         child: (field.builder != null)
             ? Icon(
                 IconGallery.boldRightArrow,
-                size: Form.rowHeight / 3,
+                size: rowHeight / 3,
                 color: theme.colorScheme.tertiary,
               )
             : const SizedBox(
-                width: Form.rowHeight / 3,
-                height: Form.rowHeight / 3,
+                width: rowHeight / 3,
+                height: rowHeight / 3,
               ),
       )
     ]);
@@ -111,7 +81,7 @@ class FormField extends StatelessWidget {
     }
 
     return (field.presentation is! SizedBox)
-        ? SizedBox(height: Form.rowHeight, child: row)
+        ? SizedBox(height: rowHeight.toDouble(), child: row)
         : row;
   }
 
@@ -152,7 +122,8 @@ class FieldEditor extends StatelessWidget {
                   color: theme.colorScheme.tertiary,
                 ),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(field.title(context), style: theme.textTheme.displayLarge),
+                  Text(field.title(context),
+                      style: theme.textTheme.displayLarge),
                   Text(
                     title(context),
                     style: theme.textTheme.displayMedium,
