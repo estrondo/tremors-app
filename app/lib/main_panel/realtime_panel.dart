@@ -1,8 +1,8 @@
-import 'package:app/components/footer.dart';
-import 'package:app/components/shadow_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tremors/components/footer.dart';
+import 'package:tremors/components/shadow_box.dart';
 
 import '../components/button.dart';
 import '../components/realtime_clock.dart';

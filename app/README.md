@@ -1,4 +1,4 @@
-# app
+# Tremors App
 
 A new Flutter project.
 

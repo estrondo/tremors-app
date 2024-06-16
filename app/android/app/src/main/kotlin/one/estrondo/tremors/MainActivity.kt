@@ -1,4 +1,4 @@
-package com.example.app
+package one.estrondo.tremors
 
 import io.flutter.embedding.android.FlutterActivity
 

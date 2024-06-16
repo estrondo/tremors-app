@@ -1,5 +1,5 @@
-import 'package:app/icon_gallery.dart';
 import 'package:flutter/material.dart';
+import 'package:tremors/icon_gallery.dart';
 
 import '../localization.dart';
 import '../panel.dart';
