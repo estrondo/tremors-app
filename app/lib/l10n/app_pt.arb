@@ -21,5 +21,6 @@
   "realtime_histogram_title": "Histograma de eventos desde",
   "realtime_select_region": "Selecionar uma região",
   "realtime_the_largest": "Os maiores",
-  "realtime_close": "Fechar"
+  "realtime_close": "Fechar",
+  "sign_in_google": "Entrar com a sua conta Google"
 }

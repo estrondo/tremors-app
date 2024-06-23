@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:tremors/components/background_map.dart';
+import 'package:tremors/exceptions.dart';
+import 'package:tremors/main_panel/login_panel.dart';
+import 'package:tremors/model/authenticator.dart';
 
 import 'foundation.dart';
 import 'main_panel/layer_panel.dart';
@@ -9,33 +15,49 @@ import 'main_panel/settings_panel.dart';
 
 typedef _WidgetBuilder = Widget Function();
 
-GoRouter router({required Widget backgroundMap, required Widget topPanel}) {
-  GoRoute routePage(String path, _WidgetBuilder builder) {
-    return GoRoute(
-        path: path, pageBuilder: (_, __) => MaterialPage(child: builder()));
-  }
+TaskEither<TremorsException, GoRouter> router() => TaskEither.Do(($) async {
+      const backgroundMap = BackgroundMap();
+      const topPanel = RealtimeTopPanel();
 
-  Widget mainPage() {
-    return Skeleton.onlyTopPanel(background: backgroundMap, topPanel: topPanel);
-  }
+      _redirect(BuildContext context, _) {
+        return (context.read<AuthenticatorModel>().isLogged) ? null : '/login';
+      }
 
-  Widget withTopPanel(Widget Function() mainPanelBuilder) {
-    return Skeleton.withTopPanel(
-      background: backgroundMap,
-      topPanel: topPanel,
-      mainPanel: mainPanelBuilder(),
-    );
-  }
+      GoRoute routePage(String path, _WidgetBuilder builder,
+          [bool isSecure = true]) {
+        final redirect = (isSecure) ? _redirect : null;
 
-  Widget onlyTopPanel(Widget panel) {
-    return Skeleton.singlePanel(background: backgroundMap, panel: panel);
-  }
+        return GoRoute(
+          path: path,
+          pageBuilder: (_, __) => MaterialPage(child: builder()),
+          redirect: redirect,
+        );
+      }
 
-  return GoRouter(debugLogDiagnostics: true, routes: [
-    routePage('/', () => mainPage()),
-    routePage('/layers', () => withTopPanel(() => const LayerPanel())),
-    routePage('/search', () => withTopPanel(() => const SearchPanel())),
-    routePage('/settings', () => withTopPanel(() => const SettingsPanel())),
-    routePage('/realtime', () => onlyTopPanel(const RealtimePanel()))
-  ]);
-}
+      Widget mainPage() {
+        return Skeleton.onlyTopPanel(
+            background: backgroundMap, topPanel: topPanel);
+      }
+
+      Widget Function() withTopPanel(Widget panel) {
+        return () => Skeleton.withTopPanel(
+              background: backgroundMap,
+              topPanel: topPanel,
+              mainPanel: panel,
+            );
+      }
+
+      Widget Function() singlePanel(Widget panel) {
+        return () =>
+            Skeleton.singlePanel(background: backgroundMap, panel: panel);
+      }
+
+      return GoRouter(debugLogDiagnostics: true, routes: [
+        routePage('/', mainPage),
+        routePage('/layers', withTopPanel(const LayerPanel())),
+        routePage('/search', withTopPanel(const SearchPanel())),
+        routePage('/settings', withTopPanel(const SettingsPanel())),
+        routePage('/realtime', singlePanel(const RealtimePanel())),
+        routePage('/login', () => LoginPanel(), false),
+      ]);
+    });

@@ -30,7 +30,11 @@ class SettingsPanel extends StatelessWidget {
       ),
       footer: Footer(
         children: [
-          Button(title: l10n.settings_logout),
+          Button(
+            title: l10n.settings_logout,
+            action: () async {
+            },
+          ),
           Button(title: l10n.settings_apply)
         ],
       ),
