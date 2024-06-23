@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tremors/svg.dart';
 
 import 'components/realtime_clock.dart';
 import 'components/shadow_box.dart';
@@ -66,7 +66,7 @@ class NavBar extends StatelessWidget {
   static const height = 25.0;
 
   static final _logo = Expanded(
-    child: SvgPicture.asset(
+    child: Svg.asset(
       'images/logo.svg',
       width: height,
       height: height,

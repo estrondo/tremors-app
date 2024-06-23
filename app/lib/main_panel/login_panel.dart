@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tremors/auth/google.dart' as google;
 import 'package:tremors/auth/id_token.dart';
 import 'package:tremors/exceptions.dart';
+import 'package:tremors/svg.dart';
 
 class LoginPanel extends StatelessWidget {
   const LoginPanel({super.key});
 
-  Widget _svg(String asset, [double? height]) => SvgPicture.asset(
-        asset,
-        height: height,
-      );
   Widget _googleSignIn(BuildContext context) {
     final localization = AppLocalizations.of(context);
 
@@ -47,7 +43,8 @@ class LoginPanel extends StatelessWidget {
               Container(
                 color: Colors.white,
                 padding: const EdgeInsets.all(5),
-                child: _svg(image, MediaQuery.of(context).size.width * 0.07),
+                child: Svg.asset(image,
+                    height: MediaQuery.of(context).size.width * 0.07),
               ),
               Container(
                 margin: const EdgeInsets.only(left: 10),
@@ -64,11 +61,15 @@ class LoginPanel extends StatelessWidget {
     );
   }
 
-  Widget _logo(BuildContext context) =>
-      _svg('images/logo.svg', MediaQuery.of(context).size.width * 0.4);
+  Widget _logo(BuildContext context) => Svg.asset(
+        'images/logo.svg',
+        width: MediaQuery.of(context).size.width * 0.4,
+      );
 
-  Widget _confusedFace(BuildContext context) =>
-      _svg('images/confused-face.svg', MediaQuery.of(context).size.width * 0.2);
+  Widget _confusedFace(BuildContext context) => Svg.asset(
+        'images/confused-face.svg',
+        height: MediaQuery.of(context).size.width * 0.2,
+      );
 
   @override
   Widget build(BuildContext context) {
