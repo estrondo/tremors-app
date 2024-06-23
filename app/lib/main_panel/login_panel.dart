@@ -32,30 +32,27 @@ class LoginPanel extends StatelessWidget {
     TaskEither<SecurityException, IdToken> Function() login,
   ) {
     final theme = Theme.of(context);
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => _run(login(), context),
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          color: color,
-          child: Row(
-            children: [
-              Container(
-                color: Colors.white,
-                padding: const EdgeInsets.all(5),
-                child: Svg.asset(image,
-                    height: MediaQuery.of(context).size.width * 0.07),
+    return GestureDetector(
+      onTap: () => _run(login(), context),
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        color: color,
+        child: Row(
+          children: [
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(5),
+              child: Svg.asset(image,
+                  height: MediaQuery.of(context).size.width * 0.07),
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 10),
+              child: Text(
+                label,
+                style: theme.textTheme.labelLarge!.copyWith(color: labelColor),
               ),
-              Container(
-                margin: const EdgeInsets.only(left: 10),
-                child: Text(
-                  label,
-                  style:
-                      theme.textTheme.labelLarge!.copyWith(color: labelColor),
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
@@ -72,9 +69,10 @@ class LoginPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
+    final theme = Theme.of(context);
 
     return ColoredBox(
-      color: Colors.white,
+      color: theme.dialogBackgroundColor,
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -87,8 +85,11 @@ class LoginPanel extends StatelessWidget {
               ]),
             ),
             SizedBox(
-              width: mediaQueryData.size.width * 0.9,
-              child: Row(
+              height: mediaQueryData.size.height * 0.05,
+            ),
+            SizedBox(
+              width: mediaQueryData.size.width * 0.90,
+              child: Column(
                 children: [
                   _googleSignIn(context),
                 ],
