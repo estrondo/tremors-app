@@ -61,14 +61,12 @@ class LoginPanel extends StatelessWidget {
     );
   }
 
-  Widget _logo(BuildContext context) => Svg.asset(
-        'images/logo.svg',
-        width: MediaQuery.of(context).size.width * 0.4,
-      );
-
-  Widget _confusedFace(BuildContext context) => Svg.asset(
-        'images/confused-face.svg',
-        height: MediaQuery.of(context).size.width * 0.2,
+  Widget _logo(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: Svg.asset(
+          'images/logo.svg',
+          width: MediaQuery.of(context).size.width * 0.4,
+        ),
       );
 
   @override
@@ -86,15 +84,6 @@ class LoginPanel extends StatelessWidget {
               width: mediaQueryData.size.width / 2,
               child: Column(children: [
                 _logo(context),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: _confusedFace(context),
-                    ),
-                  ],
-                ),
               ]),
             ),
             SizedBox(
