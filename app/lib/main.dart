@@ -5,19 +5,24 @@ import 'package:fpdart/fpdart.dart';
 import 'package:provider/provider.dart';
 import 'package:tremors/exceptions.dart';
 import 'package:tremors/model/authenticator.dart';
+import 'package:tremors/module.dart';
 import 'package:tremors/router.dart';
 
 import 'theme.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
 
   final either = await TaskEither<TremorsException, Widget>.Do(($) async {
     final authenticator = await $(AuthenticatorModel.getInstance());
+
+    final grpcModule = GRPCModule.live();
+
+    final appModule = AppModule(grpcModule: grpcModule);
+
     final materialApp = MaterialApp.router(
       color: Colors.redAccent,
-      routerConfig: await $(router()),
+      routerConfig: await $(router(appModule)),
       theme: theme(),
       localizationsDelegates: const [
         AppLocalizations.delegate,

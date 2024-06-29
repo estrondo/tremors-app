@@ -1,0 +1,11 @@
+#!/bin/sh
+
+OUTPUT="lib/grpc/generated"
+
+if [ -d "$OUTPUT" ]; then
+  rm -rf "$OUTPUT/*"
+else
+  mkdir -p "$OUTPUT"
+fi
+
+protoc --dart_out=grpc:lib/grpc/generated -Itremors-grpc tremors-grpc/webapi.v1.proto

@@ -1,0 +1,3 @@
+[submodule "app/tremors-grpc"]
+	path = app/tremors-grpc
+	url = git@github.com:estrondo/tremors-grpc.git

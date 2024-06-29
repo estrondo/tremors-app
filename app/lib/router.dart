@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:tremors/components/background_map.dart';
 import 'package:tremors/exceptions.dart';
+import 'package:tremors/main_panel/get_token.dart';
 import 'package:tremors/main_panel/login_panel.dart';
 import 'package:tremors/model/authenticator.dart';
+import 'package:tremors/module.dart';
 
 import 'foundation.dart';
 import 'main_panel/layer_panel.dart';
@@ -15,17 +17,23 @@ import 'main_panel/settings_panel.dart';
 
 typedef _WidgetBuilder = Widget Function();
 
-TaskEither<TremorsException, GoRouter> router() => TaskEither.Do(($) async {
+TaskEither<TremorsException, GoRouter> router(
+  AppModule appModule,
+) =>
+    TaskEither.Do(($) async {
       const backgroundMap = BackgroundMap();
       const topPanel = RealtimeTopPanel();
 
-      _redirect(BuildContext context, _) {
+      doRedirect(BuildContext context, _) {
         return (context.read<AuthenticatorModel>().isLogged) ? null : '/login';
       }
 
-      GoRoute routePage(String path, _WidgetBuilder builder,
-          [bool isSecure = true]) {
-        final redirect = (isSecure) ? _redirect : null;
+      GoRoute routePage(
+        String path,
+        _WidgetBuilder builder, {
+        bool isSecure = true,
+      }) {
+        final redirect = (isSecure) ? doRedirect : null;
 
         return GoRoute(
           path: path,
@@ -58,6 +66,13 @@ TaskEither<TremorsException, GoRouter> router() => TaskEither.Do(($) async {
         routePage('/search', withTopPanel(const SearchPanel())),
         routePage('/settings', withTopPanel(const SettingsPanel())),
         routePage('/realtime', singlePanel(const RealtimePanel())),
-        routePage('/login', () => LoginPanel(), false),
+        routePage('/login', () => const LoginPanel(), isSecure: false),
+        routePage(
+          '/get-token/:provider/:token',
+          () => GetTokenPanel(
+            securityService: appModule.grpcModule.securityService,
+          ),
+          isSecure: false,
+        )
       ]);
     });
