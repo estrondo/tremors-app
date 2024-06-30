@@ -16,9 +16,7 @@ void main() async {
   final either = await TaskEither<TremorsException, Widget>.Do(($) async {
     final authenticator = await $(AuthenticatorModel.getInstance());
 
-    final grpcModule = GRPCModule.live();
-
-    final appModule = AppModule(grpcModule: grpcModule);
+    final appModule = await AppModule.resolve();
 
     final materialApp = MaterialApp.router(
       color: Colors.redAccent,

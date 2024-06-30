@@ -70,7 +70,7 @@ TaskEither<TremorsException, GoRouter> router(
         routePage(
           '/get-token/:provider/:token',
           () => GetTokenPanel(
-            securityService: appModule.grpcModule.securityService,
+            service: appModule.securityModule.securityService,
           ),
           isSecure: false,
         )
