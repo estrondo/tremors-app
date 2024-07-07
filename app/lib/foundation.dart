@@ -128,3 +128,40 @@ class RealtimeTopPanel extends StatelessWidget {
     );
   }
 }
+
+class FollowUpPanel extends StatelessWidget {
+  final Widget header;
+  final Widget body;
+
+  const FollowUpPanel({
+    super.key,
+    required this.header,
+    required this.body,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return ColoredBox(
+      color: theme.colorScheme.surfaceContainer,
+      child: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Center(child: header),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              flex: 3,
+              child: body,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

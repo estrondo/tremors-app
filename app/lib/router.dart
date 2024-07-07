@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:tremors/components/background_map.dart';
 import 'package:tremors/exceptions.dart';
-import 'package:tremors/main_panel/get_token.dart';
+import 'package:tremors/main_panel/authorise_panel.dart';
 import 'package:tremors/main_panel/login_panel.dart';
 import 'package:tremors/model/authenticator.dart';
 import 'package:tremors/module.dart';
@@ -69,7 +69,7 @@ TaskEither<TremorsException, GoRouter> router(
         routePage('/login', () => const LoginPanel(), isSecure: false),
         routePage(
           '/get-token/:provider/:token',
-          () => GetTokenPanel(
+          () => AuthorisePanel(
             service: appModule.securityModule.securityService,
           ),
           isSecure: false,

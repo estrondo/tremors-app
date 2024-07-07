@@ -5,7 +5,7 @@ class SecurityService {
 
   SecurityService(this._client);
 
-  Future<AuthenticationResponse> authenticate(AuthenticationRequest request) {
-    return _client.authenticate(request);
+  Future<AuthorisationResponse> authenticate(AuthorisationRequest request) {
+    return _client.authorise(request);
   }
 }

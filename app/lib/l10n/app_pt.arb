@@ -22,5 +22,13 @@
   "realtime_select_region": "Selecionar uma região",
   "realtime_the_largest": "Os maiores",
   "realtime_close": "Fechar",
-  "sign_in_google": "Entrar com a sua conta Google"
+  "sign_in_google": "Entrar com a sua conta Google",
+  "authorise_loading": "Carregando sua conta",
+  "authorise_remote_failure": "Impossível se comunicar com o servidor.",
+  "authorise_remote_error": "Ocorreu um erro no servidor.",
+  "authorise_local_failure": "Ocorreu uma falha localmente.",
+  "authorise_local_error": "Ocorreu um erro localmente.",
+  "authorise_success": "Você está autorizado.",
+  "authorise_no_token": "Sem token e/ou provedor!",
+  "authorise_try_again": "Please, try again"
 }

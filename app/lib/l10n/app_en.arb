@@ -22,5 +22,13 @@
   "realtime_select_region": "Select a region",
   "realtime_the_largest": "The largest",
   "realtime_close": "Close",
-  "sign_in_google": "Sign In with your Google Account"
+  "sign_in_google": "Sign In with your Google Account",
+  "authorise_loading": "Loading your account",
+  "authorise_remote_failure": "Unable to communicate with the server.",
+  "authorise_remote_error": "An error happened with the server.",
+  "authorise_local_failure": "Unable to authorise locally.",
+  "authorise_local_error": "An error happened locally.",
+  "authorise_success": "You are authorised.",
+  "authorise_no_token": "There is no token or provider!",
+  "authorise_try_again": "Please, try again"
 }

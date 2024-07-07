@@ -6,7 +6,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tremors/grpc/generated/webapi.v1.pbgrpc.dart';
 import 'package:tremors/grpc/webapi.dart';
-import 'package:tremors/main_panel/get_token.dart';
+import 'package:tremors/main_panel/authorise_panel.dart';
 
 import 'get_token_test.mocks.dart';
 import 'router_helper.dart';
@@ -21,14 +21,14 @@ void main() async {
     final router = await createGoRouter(tester, [
       GoRoute(
         path: expectedGoRouterPath,
-        builder: (context, state) => GetTokenPanel(service: serviceMock),
+        builder: (context, state) => AuthorisePanel(service: serviceMock),
       )
     ]);
 
     final expectedRequest = AuthenticationRequest(
         provider: 'zyb', token: 'aaabbb', version: '1.0.0');
 
-    final expectedResponse = AuthenticationResponse(
+    final expectedResponse = AuthenticationSuccess(
       email: 'albert@mc.2',
       name: 'Einstein',
       token: 'aaabbbccc',
@@ -38,7 +38,7 @@ void main() async {
 
     when(serviceMock.authenticate(expectedRequest)).thenAnswer(
       (_) {
-        completer.complete(expectedResponse);
+        completer.complete(AuthenticationResponse(success: expectedResponse));
         return completer.future;
       },
     );
@@ -59,7 +59,7 @@ void main() async {
     final goRouter = await createGoRouter(tester, [
       GoRoute(
         path: expectedGoRouterPath,
-        builder: (context, state) => GetTokenPanel(service: serviceMock),
+        builder: (context, state) => AuthorisePanel(service: serviceMock),
       )
     ]);
 
