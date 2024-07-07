@@ -30,5 +30,6 @@
   "authorise_local_error": "An error happened locally.",
   "authorise_success": "You are authorised.",
   "authorise_no_token": "There is no token or provider!",
-  "authorise_try_again": "Please, try again"
+  "authorise_try_again": "Please, try again",
+  "authorise_goto_main": "Return to the starting"
 }

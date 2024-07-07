@@ -68,7 +68,7 @@ TaskEither<TremorsException, GoRouter> router(
         routePage('/realtime', singlePanel(const RealtimePanel())),
         routePage('/login', () => const LoginPanel(), isSecure: false),
         routePage(
-          '/get-token/:provider/:token',
+          '/authorise/:provider/:token',
           () => AuthorisePanel(
             service: appModule.securityModule.securityService,
           ),

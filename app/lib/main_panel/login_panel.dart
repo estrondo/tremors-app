@@ -101,14 +101,13 @@ class LoginPanel extends StatelessWidget {
     );
   }
 
+  // TODO: Improve it.
   Future<void> _run(TaskEither<SecurityException, IdToken> login,
       BuildContext context) async {
     switch (await login.run()) {
       case Right(value: final idToken):
-        print(idToken.token);
-        context.go('/get-token/${idToken.provider}/${idToken.token}');
+        context.go('/authorise/${idToken.provider}/${idToken.token}');
       case Left(value: final exception):
-        print(exception);
     }
   }
 }

@@ -30,5 +30,6 @@
   "authorise_local_error": "Ocorreu um erro localmente.",
   "authorise_success": "Você está autorizado.",
   "authorise_no_token": "Sem token e/ou provedor!",
-  "authorise_try_again": "Please, try again"
+  "authorise_try_again": "Por favor, tente novamente",
+  "authorise_goto_main": "Retornar para início"
 }

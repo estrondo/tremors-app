@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fpdart/fpdart.dart' hide State;
@@ -13,6 +15,8 @@ import 'package:tremors/localization.dart';
 import 'package:tremors/model/authenticator.dart';
 
 const _version = '1.0.0';
+
+const _redirectTimeout = Duration(seconds: 5);
 
 final _loadingImage = Image.asset(
   'images/loading-low.webp',
@@ -145,7 +149,7 @@ class _State extends State<_Stateful> {
             case _LocalError(error: final error):
               return _error(l10n.authorise_local_error, error, theme, l10n);
             case _Success(success: final success):
-              return _success(l10n.authorise_success, success, theme);
+              return _success(l10n, success, theme);
           }
         }
       },
@@ -182,11 +186,22 @@ class _State extends State<_Stateful> {
     );
   }
 
-  Widget _success(String data, AuthorisationSuccess success, ThemeData theme) {
-    context.go('/');
-    return Text(
-      data,
-      style: theme.textTheme.labelLarge,
+  Widget _success(
+      AppLocalizations l10n, AuthorisationSuccess success, ThemeData theme) {
+    Timer(_redirectTimeout, () {
+      if (context.mounted) {
+        context.go('/');
+      }
+    });
+
+    return Column(
+      children: [
+        Text(
+          l10n.authorise_success,
+          style: theme.textTheme.labelLarge,
+        ),
+        Button(title: l10n.authorise_goto_main)
+      ],
     );
   }
 }
