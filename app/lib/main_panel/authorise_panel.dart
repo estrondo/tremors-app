@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fpdart/fpdart.dart' hide State;
 import 'package:go_router/go_router.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:tremors/components/button.dart';
 import 'package:tremors/components/logo.dart';
@@ -19,9 +18,10 @@ const _version = '1.0.0';
 
 const _redirectTimeout = Duration(seconds: 5);
 
-final _loadingImage = LoadingAnimationWidget.beat(
-  color: const Color(0xff0084ff),
-  size: 90,
+final _loadingImage = Image.asset(
+  "images/loading.webp",
+  width: 400,
+  height: 400,
 );
 
 class AuthorisePanel extends StatelessWidget {
