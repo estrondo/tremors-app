@@ -33,3 +33,7 @@ class SecurityException extends TremorsException {
 class PreferencesException extends TremorsException {
   PreferencesException(super.message, [super.cause]);
 }
+
+class ConfigurationException extends TremorsException {
+  ConfigurationException(super.message, [super.cause]);
+}

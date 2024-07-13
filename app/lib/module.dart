@@ -1,7 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:grpc/grpc.dart';
+import 'package:tremors/exceptions.dart';
 import 'package:tremors/grpc/generated/webapi.v1.pbgrpc.dart';
 import 'package:tremors/grpc/webapi.dart';
+
+const _tremorsGRPCHost = 'grpc_host';
+const _tremorsGRPCPort = 'grpc_port';
 
 class AppModule {
   final GRPCModule grpcModule;
@@ -43,8 +47,14 @@ class GRPCModule {
   }
 
   static Future<GRPCModule> _debug() async {
-    const channelHost = 'localhost';
-    return GRPCModule(channel: ClientChannel(channelHost, port: 8080));
+    const channelHost = String.fromEnvironment(_tremorsGRPCHost);
+    const port = int.fromEnvironment(_tremorsGRPCPort);
+
+    if (channelHost != "" && port != 0) {
+      return GRPCModule(channel: ClientChannel(channelHost, port: port));
+    } else {
+      throw ConfigurationException('Invalid GRPC Configuration!');
+    }
   }
 }
 

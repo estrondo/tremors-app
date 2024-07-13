@@ -44,3 +44,5 @@ app.*.map.json
 
 /lib/grpc/generated/
 /test/**/*.mocks.dart
+
+/env/*-device.env
