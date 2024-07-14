@@ -7,20 +7,19 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 import 'package:tremors/exceptions.dart';
-import 'package:tremors/grpc/generated/webapi.v1.pb.dart';
 import 'package:tremors/grpc/generated/webapi.v1.pbgrpc.dart';
-import 'package:tremors/grpc/webapi.dart';
 import 'package:tremors/main_panel/authorise_panel.dart';
 import 'package:tremors/model/authenticator.dart';
 
 import 'authorise_test.mocks.dart';
+import 'grpc.dart';
 import 'mixins.dart';
 import 'router_helper.dart';
 
 const expectedRoute = '/authorise/:provider/:token';
 
 class Context with GoRouterAndWidgetTester {
-  final MockSecurityService service;
+  final MockSecurityServiceClient service;
   final MockAuthenticatorModel authenticatorModel;
 
   @override
@@ -37,7 +36,7 @@ class Context with GoRouterAndWidgetTester {
   });
 }
 
-@GenerateMocks([SecurityService, AuthenticatorModel])
+@GenerateMocks([SecurityServiceClient, AuthenticatorModel])
 void main() async {
   provideDummy(TaskEither<SecurityException, AuthorisationSuccess>.left(
       SecurityException('@@@')));
@@ -54,8 +53,8 @@ void main() async {
 
         final completer = Completer<AuthorisationResponse>();
 
-        when(context.service.authenticate(expectedRequest)).thenAnswer(
-          (_) => completer.future,
+        when(context.service.authorise(expectedRequest)).thenAnswer(
+          (_) => MockedResponseFuture(completer.future),
         );
 
         await context.goAndPump(
@@ -70,8 +69,8 @@ void main() async {
     contextTest(
       'should display any connection failure',
       (context) async {
-        when(context.service.authenticate(any))
-            .thenAnswer((_) => Future.error("@@@"));
+        when(context.service.authorise(any))
+            .thenAnswer((_) => MockedResponseFuture.error("@@@"));
 
         await context.goAndPump('/authorise/any/token');
 
@@ -83,8 +82,11 @@ void main() async {
     contextTest(
       'should display any remote error',
       (context) async {
-        when(context.service.authenticate(any)).thenAnswer((_) => Future.value(
-            AuthorisationResponse(version: '1.0.0', error: Error(code: '1'))));
+        when(context.service.authorise(any)).thenAnswer(
+          (_) => MockedResponseFuture.value(
+            AuthorisationResponse(version: '1.0.0', error: Error(code: '1')),
+          ),
+        );
 
         await context.goAndPump('/authorise/any/token');
 
@@ -106,8 +108,11 @@ void main() async {
             configuration: [],
             meta: []);
 
-        when(context.service.authenticate(expectedRequest)).thenAnswer(
-            (_) => Future.value(AuthorisationResponse(success: success)));
+        when(context.service.authorise(expectedRequest)).thenAnswer(
+          (_) => MockedResponseFuture.value(
+            AuthorisationResponse(success: success),
+          ),
+        );
 
         when(context.authenticatorModel.authorize(success))
             .thenAnswer((_) => TaskEither.right(success));
@@ -127,7 +132,7 @@ void contextTest(
   bool? skip,
 }) {
   return testWidgets(description, (tester) async {
-    final serviceMock = MockSecurityService();
+    final serviceMock = MockSecurityServiceClient();
     final authenticatorModel = MockAuthenticatorModel();
     await tester.binding.setLocale('en', '');
 

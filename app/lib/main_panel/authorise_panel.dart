@@ -11,7 +11,7 @@ import 'package:tremors/components/logo.dart';
 import 'package:tremors/exceptions.dart';
 import 'package:tremors/foundation.dart';
 import 'package:tremors/grpc/generated/webapi.v1.pb.dart';
-import 'package:tremors/grpc/webapi.dart';
+import 'package:tremors/grpc/generated/webapi.v1.pbgrpc.dart';
 import 'package:tremors/localization.dart';
 import 'package:tremors/model/authenticator.dart';
 
@@ -28,7 +28,7 @@ const _loadingImage = SizedBox(
 );
 
 class AuthorisePanel extends StatelessWidget {
-  final SecurityService service;
+  final SecurityServiceClient service;
 
   const AuthorisePanel({
     super.key,
@@ -67,7 +67,7 @@ class AuthorisePanel extends StatelessWidget {
 }
 
 class _Stateful extends StatefulWidget {
-  final SecurityService service;
+  final SecurityServiceClient service;
   final AuthenticatorModel authenticatorModel;
   final String provider;
   final String token;
@@ -98,7 +98,7 @@ class _State extends State<_Stateful> {
   Future<_Outcome> _run() async {
     AuthorisationResponse response;
     try {
-      response = await widget.service.authenticate(AuthorisationRequest(
+      response = await widget.service.authorise(AuthorisationRequest(
           version: _version, provider: widget.provider, token: widget.token));
     } catch (e) {
       return _RemoteFailure(e);
