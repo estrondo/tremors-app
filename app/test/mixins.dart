@@ -6,13 +6,15 @@ mixin GoRouterAndWidgetTester {
 
   WidgetTester get tester;
 
-  Future<void> goAndPump(String location, [Duration? duration]) {
+  Future<void> goAndPump(String location, [Duration? duration]) async {
     goRouter.go(location);
-    return tester.pump(duration);
+    await tester.pump();
+    return duration == null ? tester.pump() : tester.pump(duration);
   }
 
-  Future<int> goAndPumpAndSettle(String location, [Duration? duration]) {
+  Future<int> goAndPumpAndSettle(String location, [Duration? duration]) async {
     goRouter.go(location);
+    await tester.pump();
     return (duration == null)
         ? tester.pumpAndSettle()
         : tester.pumpAndSettle(duration);

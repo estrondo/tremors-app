@@ -58,7 +58,7 @@ void main() async {
           (_) => completer.future,
         );
 
-        await context.goAndPumpAndSettle(
+        await context.goAndPump(
           '/authorise/${expectedRequest.provider}/${expectedRequest.token}',
         );
 
@@ -73,7 +73,7 @@ void main() async {
         when(context.service.authenticate(any))
             .thenAnswer((_) => Future.error("@@@"));
 
-        await context.goAndPumpAndSettle('/authorise/any/token');
+        await context.goAndPump('/authorise/any/token');
 
         expect(find.text('Unable to communicate with the server.'),
             findsOneWidget);
@@ -86,7 +86,7 @@ void main() async {
         when(context.service.authenticate(any)).thenAnswer((_) => Future.value(
             AuthorisationResponse(version: '1.0.0', error: Error(code: '1'))));
 
-        await context.goAndPumpAndSettle('/authorise/any/token');
+        await context.goAndPump('/authorise/any/token');
 
         expect(find.text('An error happened with the server.'), findsOneWidget);
       },
